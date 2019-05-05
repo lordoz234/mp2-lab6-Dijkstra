@@ -28,8 +28,11 @@ class Graph {
 private:
 	int vertex;
 	template <typename U> friend std::istream& operator>> (std::istream &in, Graph<U> &g) {
+		std::cout << "Enter the number of edges" << std::endl;
+		int m;
+		std::cin >> m;
 		g.graph.resize(g.vertex);
-		for (int i = 0; i < g.vertex; i++) {
+		for (int i = 0; i < m; i++) {
 			int x, y;
 			U z;
 			in >> x >> y >> z;
@@ -103,7 +106,7 @@ template <typename T>
 bool Graph<T>::is_edge_positive() {
 	for (int i = 0; i < vertex; i++) {
 		for (unsigned j = 0; j < graph[i].size(); j++) {
-			T len = graph[j][i];
+			T len = graph[i][j].second;
 			if (len < 0) {
 				return false;
 			}
