@@ -1,0 +1,5 @@
+/Users/vladislavdevlikamov/desktop/laba_6/mp2-lab6-Dijkstra/build/CMakeFiles/rebuild_cache.dir
+/Users/vladislavdevlikamov/desktop/laba_6/mp2-lab6-Dijkstra/build/CMakeFiles/edit_cache.dir
+/Users/vladislavdevlikamov/desktop/laba_6/mp2-lab6-Dijkstra/build/sample/CMakeFiles/rebuild_cache.dir
+/Users/vladislavdevlikamov/desktop/laba_6/mp2-lab6-Dijkstra/build/sample/CMakeFiles/edit_cache.dir
+/Users/vladislavdevlikamov/desktop/laba_6/mp2-lab6-Dijkstra/build/sample/CMakeFiles/Laba.dir
