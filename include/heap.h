@@ -15,7 +15,7 @@ public:
     void insert(T a);
     void shiftdown(int i);
     void shiftup(int i);
-    T extractMin();
+    T minimum();
     int getsize();
 };
 
@@ -32,13 +32,13 @@ int Heap<T>::getsize() {
 
 template <class T>
 void Heap<T>::insert(T a) {
-    v.pb(a);
+    v.push_back(a);
     ++size;
     shiftup(size - 1);
 }
 
 template <class T>
-T Heap<T>::extractMin() {
+T Heap<T>::minimum() {
     T mini = v[0];
     if (size - 1 != 0) {
         v[0] = v[size - 1];

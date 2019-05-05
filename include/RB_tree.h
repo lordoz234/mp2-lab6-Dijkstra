@@ -35,7 +35,9 @@ public:
     T minimum();
     void insert(T);
     void erase(T);
+    bool empty();
 };
+
 
 template<class T>
 Node<T>::Node(T data) {
@@ -48,6 +50,11 @@ template<class T>
 RBTree<T>::RBTree() {
     size = 0;
     root = nullptr;
+}
+
+template <class T>
+bool RBTree<T>::empty() {
+    return ((!root) ? true : false);
 }
 
 template<class T>
@@ -126,7 +133,7 @@ template<class T>
 void RBTree<T>::fixInsertRBTree(Node<T> *&ptr) {
     Node<T> *parent = nullptr;
     Node<T> *grandparent = nullptr;
-    while (ptr != root && getColor(ptr) == RED && getColor(ptr->parent) == RED) {
+    while (ptr != root && ptr -> parent != root && getColor(ptr) == RED && getColor(ptr->parent) == RED) {
         parent = ptr->parent;
         grandparent = parent->parent;
         if (parent == grandparent->left) {
@@ -143,7 +150,7 @@ void RBTree<T>::fixInsertRBTree(Node<T> *&ptr) {
                     parent = ptr->parent;
                 }
                 rotateRight(grandparent);
-                swap(parent->color, grandparent->color);
+                std::swap(parent->color, grandparent->color);
                 ptr = parent;
             }
         } else {
@@ -160,7 +167,7 @@ void RBTree<T>::fixInsertRBTree(Node<T> *&ptr) {
                     parent = ptr->parent;
                 }
                 rotateLeft(grandparent);
-                swap(parent->color, grandparent->color);
+                std::swap(parent->color, grandparent->color);
                 ptr = parent;
             }
         }
@@ -317,7 +324,7 @@ Node<T>* RBTree<T>::get_root() {
 
 template <class T>
 T RBTree<T>::minimum() {
-	return minValueNode(root);
+	return minValueNode(root) -> data;
 }
 
 #endif //_INCLUDE_RB_TREE_H

@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 #include <random>
+#include <algorithm>
 
 static auto rng = []{
     std::mt19937 rng;

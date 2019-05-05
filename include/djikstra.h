@@ -17,6 +17,7 @@ std::vector <T> Djikstra_avl (Graph<T>& g, int start) {
     s.insert(st);
     while (!s.empty()) {
         std::pair<T, int> v1 = s.minimum();
+        s.erase(v1);
         int v = v1.second;
         for (unsigned i = 0; i < g.graph[v].size(); i++) {
             int to = g.graph[v][i].first;
@@ -39,12 +40,13 @@ std::vector <T> Djikstra_rb (Graph<T>& g, int start) {
     RBTree<std::pair<T, int>> s;
     std::pair<T, int> st = {d[start], start};
     s.insert(st);
-    while (s.getsize() != 0) {
+    while (!s.empty()) {
         std::pair<T, int> v1 = s.minimum();
-        int v = v1.se;
-        for (unsigned i = 0; i < g[v].size(); i++) {
-            int to = g[v][i].fi;
-            T len = g[v][i].se;
+        s.erase(v1);
+        int v = v1.second;
+        for (unsigned i = 0; i < g.graph[v].size(); i++) {
+            int to = g.graph[v][i].first;
+            T len = g.graph[v][i].second;
             if (d[v] + len < d[to]) {
                 d[to] = d[v] + len;
                 std::pair<T, int> temp = {d[to], to};
@@ -52,6 +54,7 @@ std::vector <T> Djikstra_rb (Graph<T>& g, int start) {
             }
         }
     }
+    return d;
 } 
 
 template <typename T>
@@ -64,10 +67,10 @@ std::vector <T> Djikstra_heap (Graph<T>& g, int start, int k) {
     s.insert(st);
     while (s.getsize() != 0) {
         std::pair<T, int> v1 = s.minimum();
-        int v = v1.se;
-        for (unsigned i = 0; i < g[v].size(); i++) {
-            int to = g[v][i].fi;
-            T len = g[v][i].se;
+        int v = v1.second;
+        for (unsigned i = 0; i < g.graph[v].size(); i++) {
+            int to = g.graph[v][i].first;
+            T len = g.graph[v][i].second;
             if (d[v] + len < d[to]) {
                 d[to] = d[v] + len;
                 std::pair<T, int> temp = {d[to], to};
@@ -75,6 +78,7 @@ std::vector <T> Djikstra_heap (Graph<T>& g, int start, int k) {
             }
         }
     }
+    return d;
 } 
 
 #endif //_INCLUDE_DIJKSTRA_H
