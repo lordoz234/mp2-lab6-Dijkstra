@@ -4,6 +4,7 @@ project(Laba)
 
 set (CMAKE_CXX_STANDARD 11)
 
+add_subdirectory(googletest)
 include_directories( include )
 add_subdirectory( sample )
 add_subdirectory( tests )

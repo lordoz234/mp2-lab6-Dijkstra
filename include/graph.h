@@ -55,6 +55,7 @@ private:
 public:
 	std::vector <std::vector <std::pair<int, T>>> graph;
 	Graph(int _vertex);
+    Graph(std::vector <std::vector <std::pair<int, T>>> &gr);
 	bool is_singularity();
 	bool is_edge_positive();
 	void create ();
@@ -70,6 +71,11 @@ template <typename T>
 Graph<T>::Graph(int _vertex) {
 	vertex = _vertex;
 	graph.resize(vertex);
+}
+
+template <typename T>
+Graph<T>::Graph(std::vector <std::vector<std::pair<int, T>>> &gr) {
+    graph = gr;
 }
 
 template <typename T>
