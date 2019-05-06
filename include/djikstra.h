@@ -28,6 +28,7 @@ std::vector <T> Djikstra_avl (Graph<T>& g, int start) {
                 s.insert(temp);
             }
         }
+        std::cout << std::endl;
     }
     return d;
 } 

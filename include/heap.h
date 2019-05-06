@@ -10,11 +10,11 @@ private:
     std::vector <T> v;
     int size;
     int k;
+    void shiftdown(int i);
+    void shiftup(int i);
 public:
     Heap(int r);
     void insert(T a);
-    void shiftdown(int i);
-    void shiftup(int i);
     T minimum();
     int getsize();
 };

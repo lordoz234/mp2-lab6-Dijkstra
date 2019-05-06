@@ -20,8 +20,6 @@ private:
     node<T>* inserts(node<T>*p, T k);
     node<T>* erases(node<T>*p, T k);
 	node<T>* minimum(node<T> *p);
-public:    
-    avl_tree();
     node<T>* creates(T x);
     node<T> *rotateRight(node<T> *p);
     node<T> *rotateLeft(node<T>* q);
@@ -29,6 +27,8 @@ public:
     unsigned char height(node<T> *p);
     int bfactor(node<T> *p);
     node<T> *balance(node<T>* p);
+public:    
+    avl_tree();
     void insert(T x);
     void erase(T x);
     T minimum();
@@ -60,6 +60,9 @@ void avl_tree<T>::newheight (node<T> *p) {
         unsigned char h2 = (p->left ? height(p->right) : 0);
         p->height = std::max(h1, h2) + 1;
     }
+    else {
+        return;
+    }
 }
 
 template <class T>
@@ -72,6 +75,9 @@ template <class T>
 int avl_tree<T>::bfactor (node<T> *p) {
     if (p) {
         return height(p->right) - height(p->left);
+    }
+    else {
+        return 0;
     }
 }
 
@@ -96,8 +102,6 @@ node<T>* avl_tree<T>::rotateLeft (node<T> *q) {
         root = p;
     }
     q -> right = p -> left;
-    if (p -> left != nullptr) {
-    }
     p -> left = q;
     newheight(q);
     newheight(p);
@@ -143,9 +147,7 @@ node<T>* avl_tree<T>::inserts(node<T>* p, T x) {
             p -> right = inserts(p -> right, x);
         }
     }
-    if (p != nullptr) {
-        return balance(p);
-    }
+    return balance(p);
 }
 
 template <class T>
@@ -163,10 +165,16 @@ node<T>* avl_tree<T>::erases (node<T> *r, T x) {
     }
     else {
         if (r -> left != nullptr) {
+            if (r == root) {
+                root = r -> left;
+            }
             r = r -> left;
         }
         else {
-            if (r == root) {
+            if (r -> right != nullptr && r == root) {
+                root = r -> right;
+            }
+            else if (r -> right == nullptr && r == root) {
                 root = nullptr;
             }
             r = r -> right;
