@@ -194,22 +194,27 @@ void Graph<T>::create () {
         }
     }
     int k = (n*(n - 1))/4 - (n - 1);
-    for (int i = 0; i < k; i++) {
-        int k = dis(gen);
-        if (r[i] == r2[k]) {
-            i--;
-        }
-        else {
-            if (g[r[i]][r2[k]] == 0) {
-                g[r[i]][r2[k]] = 1;
-                g[r2[k]][r[i]] = 1;
-                --k;
-                if (k == 0) {;
-                    break;
-                }
+    while (k > 0) {
+        for (int i = 0; i < n; i++) {
+            int k1 = dis(gen);
+            if (k <= 0) {
+                break;
+            }
+            if (r[i] == r2[k1]) {
+                i--;
             }
             else {
-                i--;
+                if (g[r[i]][r2[k1]] == 0) {
+                    g[r[i]][r2[k1]] = 1;
+                    g[r2[k1]][r[i]] = 1;
+                    --k;
+                    if (k <= 0) {;
+                        break;
+                    }
+                }
+                else {
+                    i--;
+                }
             }
         }
     }
