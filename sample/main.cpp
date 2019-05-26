@@ -1,7 +1,14 @@
 #include "../include/graph.h"
 #include "../include/djikstra.h"
+#include <stack>
 
 int main() {
+	for (int i = 1; i < 10; i++) {
+		std::cout << i << " ";
+		Graph <int> g(i);
+		g.create();
+		std::cout << std::endl;
+	}
 	while (true) {
 		std::cout << "Enter the number of vertex" << std::endl;
 		int vertex;
@@ -42,21 +49,73 @@ int main() {
 			std::cout << "Choose the starting vertex" << std::endl;
 			int start;
 			std::cin >> start;
-			std::vector <int> ans = Djikstra_avl(g, start);
+			std::pair<std::vector <int> , std::vector <int> > t = Djikstra_avl(g, start);
 			std::cout << "Enter the end vertex" << std::endl;
 			int end;
 			std::cin >> end;
-			std::cout << "The answer is " << ans[end] << std::endl;
+			if (t.first[end] == 1000000) {
+				std::cout << "No path" << std::endl;
+				continue;
+			}
+			std::cout << "The answer is " << t.first[end] << std::endl;
+			std::stack <int> r;
+			r.push(end);
+			int temp = t.second[end];
+			while (temp != -1) {
+				r.push(temp);
+				temp = t.second[temp];
+			}
+			std::cout << "Path" << std::endl;
+			while (!r.empty()) {
+				std::cout << r.top() << " ";
+				r.pop();
+			}
+			std::cout << std::endl;
+			std::cout << "If you want exit enter 1, else enter 2: " << std::endl;
+			int ex;
+			std::cin >> ex;
+			if (ex == 1) {
+				return 0;
+			}
+			else {
+				continue;
+			}
 		}
 		else if (b == 2) {
 			std::cout << "Enter the starting vertex" << std::endl;
 			int start;
 			std::cin >> start;
-			std::vector <int> ans = Djikstra_rb(g, start);
+			std::pair<std::vector <int> , std::vector <int> > t = Djikstra_rb(g, start);
 			std::cout << "Choose the end vertex" << std::endl;
 			int end;
 			std::cin >> end;
-			std::cout << "The answer is " << ans[end] << std::endl;
+			if (t.first[end] == 1000000) {
+				std::cout << "No path" << std::endl;
+				continue;
+			}
+			std::cout << "The answer is " << t.first[end] << std::endl;
+			std::stack <int> r;
+			r.push(end);
+			int temp = t.second[end];
+			while (temp != -1) {
+				r.push(temp);
+				temp = t.second[temp];
+			}
+			std::cout << "Path:" << std::endl;
+			while (!r.empty()) {
+				std::cout << r.top() << " ";
+				r.pop();
+			}
+			std::cout << std::endl;
+			std::cout << "If you want exit enter 1, else enter 2: " << std::endl;
+			int ex;
+			std::cin >> ex;
+			if (ex == 1) {
+				return 0;
+			}
+			else {
+				continue;
+			}
 		}
 		else {
 			std::cout << "Enter the starting vertex" << std::endl;
@@ -65,11 +124,37 @@ int main() {
 			std::cout << "Enter the D" << std::endl;
 			int D;
 			std::cin >> D;
-			std::vector <int> ans = Djikstra_heap(g, start, D);
+			std::pair<std::vector <int> , std::vector <int> > t = Djikstra_heap(g, start, D);
 			std::cout << "Choose the end vertex" << std::endl;
 			int end;
 			std::cin >> end;
-			std::cout << "The answer is " << ans[end] << std::endl;
+			if (t.first[end] == 1000000) {
+				std::cout << "No path" << std::endl;
+				continue;
+			}
+			std::cout << "The answer is " << t.first[end] << std::endl;
+			std::stack <int> r;
+			r.push(end);
+			int temp = t.second[end];
+			while (temp != -1) {
+				r.push(temp);
+				temp = t.second[temp];
+			}
+			std::cout << "Path:" << std::endl;
+			while (!r.empty()) {
+				std::cout << r.top() << " ";
+				r.pop();
+			}
+			std::cout << std::endl;
+			std::cout << "If you want exit enter 1, else enter 2: " << std::endl;
+			int ex;
+			std::cin >> ex;
+			if (ex == 1) {
+				return 0;
+			}
+			else {
+				continue;
+			}
 		}
 	}
     return 0;

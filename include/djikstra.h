@@ -8,9 +8,10 @@
 #include <vector>
 
 template <typename T>
-std::vector <T> Djikstra_avl (Graph<T>& g, int start) {
+std::pair<std::vector <T>, std::vector<int>> Djikstra_avl (Graph<T>& g, int start) {
 	int n = g.get_size_graph();
 	std::vector <T> d(n, 1000000);
+    std::vector <int> p(n, -1);
     d[start] = 0;
     avl_tree<std::pair<T, int>> s;
     std::pair<T, int> st = {d[start], start};
@@ -24,19 +25,20 @@ std::vector <T> Djikstra_avl (Graph<T>& g, int start) {
             T len = g.graph[v][i].second;
             if (d[v] + len < d[to]) {
                 d[to] = d[v] + len;
+                p[to] = v;
                 std::pair<T, int> temp = {d[to], to};
                 s.insert(temp);
             }
         }
-        std::cout << std::endl;
     }
-    return d;
+    return std::make_pair(d, p);
 } 
 
 template <typename T>
-std::vector <T> Djikstra_rb (Graph<T>& g, int start) {
+std::pair<std::vector <T>, std::vector<int>>  Djikstra_rb (Graph<T>& g, int start) {
 	int n = g.get_size_graph();
 	std::vector <T> d(n, 1000000);
+    std::vector <int> p(n, -1);
     d[start] = 0;
     RBTree<std::pair<T, int>> s;
     std::pair<T, int> st = {d[start], start};
@@ -49,19 +51,21 @@ std::vector <T> Djikstra_rb (Graph<T>& g, int start) {
             int to = g.graph[v][i].first;
             T len = g.graph[v][i].second;
             if (d[v] + len < d[to]) {
+                p[to] = v;
                 d[to] = d[v] + len;
                 std::pair<T, int> temp = {d[to], to};
                 s.insert(temp);
             }
         }
     }
-    return d;
+    return std::make_pair(d, p);
 } 
 
 template <typename T>
-std::vector <T> Djikstra_heap (Graph<T>& g, int start, int k) {
+std::pair<std::vector <T>, std::vector<int>>  Djikstra_heap (Graph<T>& g, int start, int k) {
 	int n = g.get_size_graph();
 	std::vector <T> d(n, 1000000);
+    std::vector <int> p(n, -1);
     d[start] = 0;
     Heap<std::pair<T, int>> s(k);
     std::pair<T, int> st = {d[start], start};
@@ -73,13 +77,14 @@ std::vector <T> Djikstra_heap (Graph<T>& g, int start, int k) {
             int to = g.graph[v][i].first;
             T len = g.graph[v][i].second;
             if (d[v] + len < d[to]) {
+                p[to] = v;
                 d[to] = d[v] + len;
                 std::pair<T, int> temp = {d[to], to};
                 s.insert(temp);
             }
         }
     }
-    return d;
+    return std::make_pair(d, p);
 } 
 
 #endif //_INCLUDE_DIJKSTRA_H
